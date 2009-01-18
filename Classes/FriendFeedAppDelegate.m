@@ -10,6 +10,8 @@
 #import "EveryoneListController.h"
 #import "MeListController.h"
 #import "FriendsListController.h"
+#import "PreferencesController.h"
+
 
 @implementation FriendFeedAppDelegate
 
@@ -41,6 +43,14 @@
 	[localViewControllersArray addObject:navigationController];
 	[navigationController release];
 
+	
+	PreferencesController *preferencesController = [[PreferencesController alloc] init];
+	navigationController = [[UINavigationController alloc] initWithRootViewController:preferencesController];
+	[preferencesController release];
+	[localViewControllersArray addObject:navigationController];
+	[navigationController release];
+	
+	
 	tabBarController.viewControllers = localViewControllersArray;
 	[localViewControllersArray release];
 	
