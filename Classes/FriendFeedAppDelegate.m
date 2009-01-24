@@ -42,7 +42,6 @@
 	[everyoneListController release];
 	[localViewControllersArray addObject:navigationController];
 	[navigationController release];
-
 	
 	PreferencesController *preferencesController = [[PreferencesController alloc] init];
 	navigationController = [[UINavigationController alloc] initWithRootViewController:preferencesController];

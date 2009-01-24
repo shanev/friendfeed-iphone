@@ -62,6 +62,7 @@
 		34CF51560DA6F77C00905FB6 /* everyone.png in Resources */ = {isa = PBXBuildFile; fileRef = 34CF51550DA6F77C00905FB6 /* everyone.png */; };
 		34CF515C0DA6FA5D00905FB6 /* picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 34CF515B0DA6FA5D00905FB6 /* picture.png */; };
 		34D0CFCE0DA4B5EE00D09F5D /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D0CFCD0DA4B5EE00D09F5D /* twitter.png */; };
+		796227F20F2AF20F00DB1232 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 796227F10F2AF20F00DB1232 /* Base64.m */; };
 		79DA8FA60F2329E10095139A /* toolbar_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DA8FA50F2329E10095139A /* toolbar_settings.png */; };
 		79DA8FB20F232AEA0095139A /* settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DA8FB10F232AEA0095139A /* settings.xib */; };
 		79DA8FBA0F232DB20095139A /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DA8FB90F232DB20095139A /* PreferencesController.m */; };
@@ -140,6 +141,8 @@
 		34CF51550DA6F77C00905FB6 /* everyone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = everyone.png; sourceTree = "<group>"; };
 		34CF515B0DA6FA5D00905FB6 /* picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture.png; sourceTree = "<group>"; };
 		34D0CFCD0DA4B5EE00D09F5D /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
+		796227F00F2AF20F00DB1232 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		796227F10F2AF20F00DB1232 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		79DA8FA50F2329E10095139A /* toolbar_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_settings.png; sourceTree = "<group>"; };
 		79DA8FB10F232AEA0095139A /* settings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = settings.xib; sourceTree = "<group>"; };
 		79DA8FB80F232DB20095139A /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreferencesController.h; path = ../PreferencesController.h; sourceTree = "<group>"; };
@@ -184,6 +187,8 @@
 				3478E2F90DA9E9F3003A078A /* UICellTextView.m */,
 				3478E3010DA9EBAF003A078A /* UISourceCell.h */,
 				3478E3020DA9EBAF003A078A /* UISourceCell.m */,
+				796227F00F2AF20F00DB1232 /* Base64.h */,
+				796227F10F2AF20F00DB1232 /* Base64.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -432,6 +437,7 @@
 				3478E2FA0DA9E9F3003A078A /* UICellTextView.m in Sources */,
 				3478E3030DA9EBAF003A078A /* UISourceCell.m in Sources */,
 				79DA8FBA0F232DB20095139A /* PreferencesController.m in Sources */,
+				796227F20F2AF20F00DB1232 /* Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

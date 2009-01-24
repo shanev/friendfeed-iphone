@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FeedItem.h"
+//#import "FeedItem.h"
 
 @interface FriendFeedAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;

@@ -11,6 +11,7 @@
 #import	"FeedItem.h"
 #import "CJSONScanner.h"
 #import "FeedItemTableViewCell.h"
+#import "Base64.h"
 
 @implementation MeListController
 
