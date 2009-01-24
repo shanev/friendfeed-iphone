@@ -53,6 +53,7 @@
 	tabBarController.viewControllers = localViewControllersArray;
 	[localViewControllersArray release];
 	
+	[[NSNotificationCenter defaultCenter] postNotificationName:FFSettingsChanged object:nil]; 
 	// Create window
 	self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
@@ -60,10 +61,13 @@
 	[self.window addSubview:[self.tabBarController view]];
 
 	// Show window
-	[self.window makeKeyAndVisible];
+	[self.window makeKeyAndVisible];	
 
 }
 
+-(void)changed:(NSNotification *)note{
+	NSLog(@"notified");
+}
 
 - (void)dealloc {
 	[window release];

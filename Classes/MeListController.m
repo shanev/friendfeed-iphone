@@ -12,6 +12,7 @@
 #import "CJSONScanner.h"
 #import "FeedItemTableViewCell.h"
 #import "Base64.h"
+#import "PreferencesController.h"
 
 @implementation MeListController
 
@@ -21,16 +22,31 @@
 
 - (id)init
 {
+	if (self = [super init]) {
+		// Initialize your view controller.
+		self.title = @"Me";
+		self.tabBarItem.image = [UIImage imageNamed:@"flickr.png"];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChange:) name:FFSettingsChanged object:nil];
+	}
+	return self;
+}
+
+-(void) initConnectionForUserName:(NSString *)userName
+						remoteKey:(NSString *)remoteKey{
 	NSString *post = @"";
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-
+	
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-
+	
 	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
-	NSString *authValue = [NSString stringWithFormat:@"Basic %@", @"c2hhbmV2Om1hcmVzODM3ZGluZXM="];
+	
+	NSString *ns = [[NSString stringWithFormat:@"%@:%@", userName, remoteKey] autorelease];
+	NSString *authValue = [NSString stringWithFormat:@"Basic %@", [[ns autorelease] base64Encode]];
 	[request setValue:authValue forHTTPHeaderField:@"Authorization"];
-
-	[request setURL:[NSURL URLWithString:@"http://friendfeed.com/api/feed/user/shanev"]];
+	
+	NSString *s=[[NSString stringWithString:@"http://friendfeed.com/api/feed/user/"] autorelease];
+	[request setURL:[NSURL URLWithString:[s stringByAppendingString:userName]]];
 	[request setHTTPMethod:@"GET"];
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];
 	[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -45,15 +61,16 @@
 	{
 		// inform the user that the download could not be made
 	}	
-
-	if (self = [super init]) {
-		// Initialize your view controller.
-		self.title = @"Me";
-		//self.tabBarItem.image = [UIImage imageNamed:@"picture.png"];
-		self.tabBarItem.image = [UIImage imageNamed:@"flickr.png"]; 
-		}
-	return self;
 }
+
+
+-(void) settingsChange: (NSNotification *) note{
+	NSLog(@"loading with new param");
+	[self initConnectionForUserName:[[NSUserDefaults standardUserDefaults] valueForKey:FFUserName] 
+						  remoteKey: [[NSUserDefaults standardUserDefaults] valueForKey:FFRemoteKey]];
+	
+}
+
 
 - (void)loadView
 {
@@ -173,5 +190,7 @@
 
 - (void)dealloc
 {
+	[receivedData release];
 	[super dealloc];
 }
+@end
