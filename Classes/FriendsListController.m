@@ -12,6 +12,8 @@
 #import "CJSONScanner.h"
 #import "FeedItemTableViewCell.h"
 #import "DetailViewController.h"
+#import "Base64.h"
+#import "PreferencesController.h"
 
 @implementation FriendsListController
 
@@ -21,15 +23,32 @@
 
 - (id)init
 {
+
+
+	if (self = [super init]) {
+		// Initialize your view controller.
+		self.title = @"Friends";
+		self.tabBarItem.image = [UIImage imageNamed:@"seesmic.png"]; 
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChange:) name:FFSettingsChanged object:nil];
+		}
+	return self;
+}
+
+
+-(void) initConnectionForUserName:(NSString *)userName
+						remoteKey:(NSString *)remoteKey{
+	
+	
 	NSString *post = @"";
 	NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-
+	
 	NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-
+	
 	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
-	NSString *authValue = [NSString stringWithFormat:@"Basic %@", @"c2hhbmV2Om1hcmVzODM3ZGluZXM="];
+	NSString *ns = [[NSString stringWithFormat:@"%@:%@", userName, remoteKey] autorelease];
+	NSString *authValue = [NSString stringWithFormat:@"Basic %@", [[ns autorelease] base64Encode]];	
 	[request setValue:authValue forHTTPHeaderField:@"Authorization"];
-
+	
 	[request setURL:[NSURL URLWithString:@"http://friendfeed.com/api/feed/home"]];
 	[request setHTTPMethod:@"GET"];
 	[request setValue:postLength forHTTPHeaderField:@"Content-Length"];
@@ -45,14 +64,16 @@
 	{
 		// inform the user that the download could not be made
 	}	
-
-	if (self = [super init]) {
-		// Initialize your view controller.
-		self.title = @"Friends";
-		self.tabBarItem.image = [UIImage imageNamed:@"seesmic.png"]; 
-		}
-	return self;
 }
+
+
+-(void) settingsChange: (NSNotification *) note{
+	NSLog(@"loading with new param");
+	[self initConnectionForUserName:[[NSUserDefaults standardUserDefaults] valueForKey:FFUserName] 
+						  remoteKey: [[NSUserDefaults standardUserDefaults] valueForKey:FFRemoteKey]];
+	
+}
+
 
 - (void)loadView
 {
